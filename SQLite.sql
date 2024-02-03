@@ -10,6 +10,7 @@ SELECT * FROM appleStore_description3
 UNION ALL
 SELECT * FROM appleStore_description4
 
+	
 -- Identifying stakeholder 
 -- here the the stakeholder is an apple developer who would like to seek answers 
 -- regarding which app categories are most popular what are the pricing and how to improve ratings
@@ -24,6 +25,7 @@ FROM AppleStore
 SELECT COUNT(DISTINCT id) AS UniqueAppIds
 FROM applestore_description_combined
 
+
 	
 --check for any missing values in key fields
 	
@@ -35,12 +37,16 @@ SELECT COUNT(*) AS MissingValue
 FROM applestore_description_combined
 WHERE app_desc is NULL
 
+
+	
 --Finding the number of apps per genre
 
 SELECT prime_genre, COUNT(*) AS NumApps
 FROM AppleStore
 GROUP BY prime_genre
 ORDER BY NumApps DESC
+
+
 
 	
 --Get an overview of the apps ratingsAppleStore
@@ -49,6 +55,8 @@ SELECT 	MIN(user_rating) AS MinRating,
 	MAX(user_rating) AS MaxRating,
         AVG(user_rating) AS AvgRating
 FROM AppleStore
+
+
 
 	
 --Finding if paid apps have higher ratings than free apps 
@@ -60,6 +68,8 @@ SELECT CASE
         ROUND(avg(user_rating),2) AS Avg_rating
 FROM AppleStore
 GROUP BY App_Type
+
+	
 
 -- Check if apps with more supported languages have higher ratings
 
@@ -73,6 +83,7 @@ FROM AppleStore
 GROUP BY language_bucket
 ORDER BY Avg_Rating DESC
 
+
 	
 --Finding genres with low ratings
 
@@ -82,6 +93,8 @@ group by prime_genre
 ORDER BY Avg_Rating ASC
 LIMIT 10
 
+
+	
 --Finding if there is a correlation between the length of the app description and the user ratings
 	
 SELECT CASE
@@ -98,6 +111,8 @@ GROUP BY desc_length
 ORDER BY Avg_Rating DESC
 
 
+
+	
 --Finding the top rated app from each genre
 
 SELECT prime_genre, track_name, user_rating
@@ -109,6 +124,8 @@ FROM
      ) AS a 
 WHERE 
 a.rank = 1
+
+
 
 -- Final Recommendation
 
